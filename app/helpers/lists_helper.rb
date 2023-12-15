@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-module ListsHelper
+module ListsHelper # rubocop:todo Style/Documentation
 end

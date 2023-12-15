@@ -49,11 +49,11 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
       delete list_url(@list)
     end
 
-    #TEST FOR EACH VALIDATION get rid of whatevers being tested, putting it in ''
-    test 'should not implement completed' do 
+    # TEST FOR EACH VALIDATION get rid of whatevers being tested, putting it in ''
+    test 'should not implement completed' do
       post list_url,
-      params: { list: { completed: '', description: @list.description, title: @list.title,
-      user_id: @list.user_id } }
+           params: { list: { completed: '', description: @list.description, title: @list.title,
+                             user_id: @list.user_id } }
 
       assert_not (200...299).include?(response.code.to.i)
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ListsController < ApplicationController
+class ListsController < ApplicationController # rubocop:todo Style/Documentation
   before_action :authenticate_user!
   before_action :set_list, only: %i[show edit update destroy]
 
@@ -41,7 +41,7 @@ class ListsController < ApplicationController
   end
 
   # POST /lists or /lists.json
-  def create
+  def create # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     @list = List.new(list_params)
     if @list.user_id != current_user.id
       redirect_to lists_url
@@ -60,7 +60,7 @@ class ListsController < ApplicationController
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
-  def update
+  def update # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     if @list.user_id != current_user.id
       redirect_to lists_url
       return
