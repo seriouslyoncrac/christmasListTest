@@ -50,13 +50,14 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     end
 
     #TEST FOR EACH VALIDATION get rid of whatevers being tested, putting it in ''
-    test 'should ' do 
+    test 'should not implement completed' do 
       post list_url,
-      params:
+      params: { list: { completed: '', description: @list.description, title: @list.title,
+      user_id: @list.user_id } }
 
       assert_not (200...299).include?(response.code.to.i)
     end
-    
+
     assert_redirected_to lists_url
   end
 end
