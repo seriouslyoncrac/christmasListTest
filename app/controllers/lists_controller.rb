@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
-class ListsController < ApplicationController # rubocop:todo Style/Documentation
+class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: %i[show edit update destroy]
 
   # GET /lists or /lists.json
   def index
-    @lists = List.where user_id: current_user.id
+    @lists = current_user.admin ? List.all : List.where(user_id: current_user.id)
   end
 
   # GET /lists/1 or /lists/1.json
@@ -14,16 +12,6 @@ class ListsController < ApplicationController # rubocop:todo Style/Documentation
     return unless @list.user_id != current_user.id
 
     redirect_to lists_url
-    nil
-  end
-
-  def admin
-    if current_user.admin
-      @lists = Lists.all
-      render :index
-    else
-      redirect_to lists_url
-    end
   end
 
   # GET /lists/new
@@ -37,11 +25,10 @@ class ListsController < ApplicationController # rubocop:todo Style/Documentation
     return unless @list.user_id != current_user.id
 
     redirect_to lists_url
-    nil
   end
 
   # POST /lists or /lists.json
-  def create # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
+  def create
     @list = List.new(list_params)
     if @list.user_id != current_user.id
       redirect_to lists_url
@@ -60,7 +47,7 @@ class ListsController < ApplicationController # rubocop:todo Style/Documentation
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
-  def update # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
+  def update
     if @list.user_id != current_user.id
       redirect_to lists_url
       return

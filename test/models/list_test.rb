@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "save christmasListTest" do
+    user = users(:one) 
+    assert user.save
+  end
 end
