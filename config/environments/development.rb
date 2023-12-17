@@ -11,6 +11,7 @@ Rails.application.configure do # rubocop:todo Metrics/BlockLength
   config.enable_reloading = true
   config.hosts.clear
 
+
   # Do not eager load code on boot.
   config.eager_load = false
 
